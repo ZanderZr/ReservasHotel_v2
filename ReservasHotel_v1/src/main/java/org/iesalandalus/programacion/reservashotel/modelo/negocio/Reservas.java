@@ -9,138 +9,88 @@ import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class Reservas {
+    private ArrayList<Reserva> coleccionReservas;
 
-    private int capacidad;
-    private int tamano;
-    private Reserva[] coleccionReservas;
-
-    public Reservas(int capacidad){
-        this.capacidad = capacidad;
-        this.coleccionReservas = new Reserva[capacidad];
+    public Reservas(){
+        this.coleccionReservas = new ArrayList<>();
     }
 
-    public Reserva[] get() {
-        return copiaProfundaReservas();
-    }
-
-    private Reserva[] copiaProfundaReservas() {
-        Reserva[] copiaProfunda = new Reserva[tamano];
-        for (int i = 0; i < tamano; i++) {
-            copiaProfunda[i] = new Reserva(coleccionReservas[i]);
+    public ArrayList<Reserva> get(){
+        ArrayList<Reserva> copia = new ArrayList<>();
+        for(Reserva reserva : coleccionReservas) {
+            copia.add(new Reserva(reserva));
         }
-        return copiaProfunda;
+        return null;
     }
-    public int getCapacidad() {
-        return capacidad;
-    }
-    public int getTamano() {
-        return tamano;
+    public int getTamano(){
+        return coleccionReservas.size();
     }
     public void insertar(Reserva reserva) throws OperationNotSupportedException {
         if (reserva == null) {
             throw new IllegalArgumentException("No se puede insertar una reserva nula.");
         }
         if (buscar(reserva) != null) {
-            throw new OperationNotSupportedException("La reserva ya está registrada y no se admiten repetidos.");
+            throw new OperationNotSupportedException("La reserva ya estï¿½ registrada y no se admiten repetidos.");
         }
-        if (tamanoSuperado()) {
-            throw new OperationNotSupportedException("No se pueden insertar más reservas, se ha alcanzado la capacidad máxima.");
-        }
-        if (capacidadSuperada()) {
-            throw new IllegalStateException("Se ha superado la capacidad máxima, esto no debería ocurrir.");
-        }
-        coleccionReservas[tamano++] = reserva;
+        coleccionReservas.add(reserva);
     }
 
     public Reserva buscar(Reserva reserva) throws NoSuchElementException {
-        for (int i = 0; i < tamano; i++) {
-            if (coleccionReservas[i].equals(reserva)) {
-                return coleccionReservas[i];
-            }
-        }
-        return null;
+       int indice = coleccionReservas.indexOf(reserva);
+       if (indice != -1) {
+           return coleccionReservas.get(indice);
+       }
+       return null;
     }
 
     public void borrar(Reserva reserva) throws NoSuchElementException {
-        int indice = buscarIndice(reserva);
-        if (indice != -1) {
-            desplazarUnaPosicionHaciaIzquierda(indice);
-            tamano--;
-        } else {
-            throw new NoSuchElementException("La reserva a borrar no se encuentra en la colección.");
+        if (!coleccionReservas.remove(reserva)){
+            throw new NoSuchElementException("La reserva proporcionada no se encuentra en la colecciÃ³n.");
         }
     }
 
-    private int buscarIndice(Reserva reserva) throws NoSuchElementException {
-        for (int i = 0; i < tamano; i++) {
-            if (coleccionReservas[i].equals(reserva)) {
-                return i;
+    public ArrayList<Reserva> getReservas(Huesped huesped){
+        ArrayList<Reserva> reservasHuesped = new ArrayList<>();
+        for ( Reserva reserva : coleccionReservas){
+            if (reserva.getHuesped().equals(huesped)){
+                reservasHuesped.add(new Reserva(reserva));
             }
         }
-        return -1;
-    }
-
-    private boolean tamanoSuperado() {
-        return tamano >= capacidad;
-    }
-
-    private boolean capacidadSuperada() {
-        return tamano > capacidad;
-    }
-
-    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
-        if (indice < 0 || indice >= tamano) {
-            throw new IndexOutOfBoundsException("Índice fuera de rango.");
+        if (reservasHuesped.isEmpty()) {
+            throw new NoSuchElementException("No se encontraron reservas para el huÃ©sped proporcionado.");
         }
-        for (int i = indice; i < tamano - 1; i++) {
-            coleccionReservas[i] = coleccionReservas[i + 1];
-        }
+        return reservasHuesped;
     }
 
-    public Reserva[] getReservas(Huesped huesped) {
-        Reserva[] reservasHuesped = new Reserva[tamano];
-        int contador = 0;
-        for (int i = 0; i < tamano; i++) {
-            if (coleccionReservas[i].getHuesped().equals(huesped)) {
-                reservasHuesped[contador++] = new Reserva(coleccionReservas[i]);
+    public ArrayList<Reserva> getReservas(TipoHabitacion tipoHabitacion) {
+        ArrayList<Reserva> reservasTipoHabitacion = new ArrayList<>();
+        for (Reserva reserva : coleccionReservas) {
+            if (reserva.getHabitacion().getTipoHabitacion().equals(tipoHabitacion)) {
+                reservasTipoHabitacion.add(new Reserva(reserva));
             }
         }
-        if (contador == 0) {
-            throw new NoSuchElementException("No se encontraron reservas para el huésped proporcionado.");
+        if (reservasTipoHabitacion.isEmpty()) {
+            throw new NoSuchElementException("No se encontraron reservas para el tipo de habitaciï¿½n proporcionado.");
         }
-        return Arrays.copyOf(reservasHuesped, contador);
+        return reservasTipoHabitacion;
     }
 
-    public Reserva[] getReservas(TipoHabitacion tipoHabitacion) {
-        Reserva[] reservasTipoHabitacion = new Reserva[tamano];
-        int contador = 0;
-        for (int i = 0; i < tamano; i++) {
-            if (coleccionReservas[i].getHabitacion().getTipoHabitacion().equals(tipoHabitacion)) {
-                reservasTipoHabitacion[contador++] = new Reserva(coleccionReservas[i]);
+    public ArrayList<Reserva> getReservasFuturas(Habitacion habitacion) {
+        ArrayList<Reserva> reservasFuturas = new ArrayList<>();
+        for (Reserva reserva : coleccionReservas) {
+            if (reserva.getHabitacion().equals(habitacion) && reserva.getFechaInicioReserva().isAfter(LocalDate.now())) {
+                reservasFuturas.add(new Reserva(reserva));
             }
         }
-        if (contador == 0) {
-            throw new NoSuchElementException("No se encontraron reservas para el tipo de habitación proporcionado.");
+        if (reservasFuturas.isEmpty()) {
+            throw new NoSuchElementException("No se encontraron reservas futuras para la habitaciï¿½n proporcionada.");
         }
-        return Arrays.copyOf(reservasTipoHabitacion, contador);
-    }
-
-    public Reserva[] getReservasFuturas(Habitacion habitacion) {
-        Reserva[] reservasFuturas = new Reserva[tamano];
-        int contador = 0;
-        for (int i = 0; i < tamano; i++) {
-            if (coleccionReservas[i].getHabitacion().equals(habitacion) && coleccionReservas[i].getFechaInicioReserva().isAfter(LocalDate.now())) {
-                reservasFuturas[contador++] = new Reserva(coleccionReservas[i]);
-            }
-        }
-        if (contador == 0) {
-            throw new NoSuchElementException("No se encontraron reservas futuras para la habitación proporcionada.");
-        }
-        return Arrays.copyOf(reservasFuturas, contador);
+        return reservasFuturas;
     }
 
     public void realizarCheckin(Reserva reserva, LocalDateTime fechaHora) {
@@ -149,12 +99,12 @@ public class Reservas {
             if (reservaEncontrada != null) {
                 if (reservaEncontrada.getCheckIn() == null) {
                     reservaEncontrada.setCheckIn(fechaHora);
-                    System.out.println("Checkin realizado con éxito: " + fechaHora.format(DateTimeFormatter.ofPattern(Reserva.FORMATO_FECHA_HORA_RESERVA)));
+                    System.out.println("Checkin realizado con ï¿½xito: " + fechaHora.format(DateTimeFormatter.ofPattern(Reserva.FORMATO_FECHA_HORA_RESERVA)));
                 } else {
                     System.out.println("Ya se ha realizado el check-in para esta reserva.");
                 }
             } else {
-                throw new NoSuchElementException("La reserva no se encuentra en la colección.");
+                throw new NoSuchElementException("La reserva no se encuentra en la colecciï¿½n.");
             }
         } catch (Exception e) {
             System.out.println("Error al realizar el check-in: " + e.getMessage());
@@ -167,12 +117,12 @@ public class Reservas {
             if (reservaEncontrada != null) {
                 if (reservaEncontrada.getCheckIn() != null && reservaEncontrada.getCheckOut() == null) {
                     reservaEncontrada.setCheckOut(fechaHora);
-                    System.out.println("Checkout realizado con éxito: " + fechaHora.format(DateTimeFormatter.ofPattern(Reserva.FORMATO_FECHA_HORA_RESERVA)));
+                    System.out.println("Checkout realizado con ï¿½xito: " + fechaHora.format(DateTimeFormatter.ofPattern(Reserva.FORMATO_FECHA_HORA_RESERVA)));
                 } else {
                     System.out.println("No se puede realizar el checkout sin haber hecho el checkin.");
                 }
             } else {
-                throw new NoSuchElementException("La reserva no se encuentra en la colección.");
+                throw new NoSuchElementException("La reserva no se encuentra en la colecciï¿½n.");
             }
         } catch (Exception e) {
             System.out.println("Error al realizar el check-out: " + e.getMessage());
