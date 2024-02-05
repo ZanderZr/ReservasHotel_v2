@@ -35,16 +35,15 @@ public class Vista {
         terminar();
     }
 
-
     public void terminar() {
-        System.out.println("Gracias por utilizar nuestra aplicación. ¡Hasta pronto!");
+        System.out.println("Gracias por utilizar nuestra aplicaciï¿½n. ï¿½Hasta pronto!");
     }
 
     private void ejecutarOpcion(Opcion opcion) {
 
         switch (opcion) {
             case SALIR -> {
-                System.out.println("Cerrando la aplicación...");
+                System.out.println("Cerrando la aplicaciï¿½n...");
                 System.exit(0);
                 break;
             }
@@ -81,15 +80,15 @@ public class Vista {
             if (!huespedes.equals(nuevoHuesped)) {
                 try {
                     controlador.insertar(nuevoHuesped);
-                    System.out.println("Huésped insertado correctamente.");
+                    System.out.println("Huï¿½sped insertado correctamente.");
                 } catch (OperationNotSupportedException e) {
-                    System.out.println("Error al insertar el huésped: " + e.getMessage());
+                    System.out.println("Error al insertar el huï¿½sped: " + e.getMessage());
                 }
             } else {
-                System.out.println("El huésped ya está registrado en el sistema.");
+                System.out.println("El huï¿½sped ya estï¿½ registrado en el sistema.");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Error al leer el huésped: " + e.getMessage());
+            System.out.println("Error al leer el huï¿½sped: " + e.getMessage());
         }
     }
 
@@ -98,12 +97,12 @@ public class Vista {
             Huesped huespedFicticio = Consola.getHuespedPorDni();
             Huesped huespedEncontrado = controlador.buscar(huespedFicticio);
             if (huespedEncontrado != null) {
-                System.out.println("Huésped encontrado: " + huespedEncontrado);
+                System.out.println("Huï¿½sped encontrado: " + huespedEncontrado);
             } else {
-                System.out.println("No se encontró ningún huésped con el DNI proporcionado.");
+                System.out.println("No se encontrï¿½ ningï¿½n huï¿½sped con el DNI proporcionado.");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Error al buscar el huésped: " + e.getMessage());
+            System.out.println("Error al buscar el huï¿½sped: " + e.getMessage());
         }
     }
 
@@ -113,12 +112,12 @@ public class Vista {
             Huesped huespedBorrado = controlador.buscar(huespedFicticio);
             if (huespedBorrado != null) {
                 controlador.borrar(huespedBorrado);
-                System.out.println("Huésped borrado: " + huespedBorrado);
+                System.out.println("Huï¿½sped borrado: " + huespedBorrado);
             } else {
-                System.out.println("No se encontró ningún huésped con el DNI proporcionado.");
+                System.out.println("No se encontrï¿½ ningï¿½n huï¿½sped con el DNI proporcionado.");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Error al buscar el huésped: " + e.getMessage());
+            System.out.println("Error al buscar el huï¿½sped: " + e.getMessage());
         } catch (OperationNotSupportedException e) {
             throw new RuntimeException(e);
         }
@@ -126,9 +125,9 @@ public class Vista {
 
     public void mostrarHuespedes() {
         if (controlador.getHuespedes().length == 0) {
-            System.out.println("No hay huéspedes almacenados.");
+            System.out.println("No hay huï¿½spedes almacenados.");
         } else {
-            System.out.println("Lista de huéspedes almacenados:");
+            System.out.println("Lista de huï¿½spedes almacenados:");
             for (Huesped huesped : controlador.getHuespedes()) {
                 System.out.println(huesped.toString());
             }
@@ -148,10 +147,10 @@ public class Vista {
                     System.out.println("Error al insertar la habitacion: " + e.getMessage());
                 }
             } else {
-                System.out.println("La habitacion ya está registrada en el sistema.");
+                System.out.println("La habitacion ya estï¿½ registrada en el sistema.");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Error al leer la habitación: " + e.getMessage());
+            System.out.println("Error al leer la habitaciï¿½n: " + e.getMessage());
         }
     }
 
@@ -160,12 +159,12 @@ public class Vista {
             Habitacion habitacionFicticia = Consola.leerHabitacionPorIdentificador();
             Habitacion habitacionEncontrada = controlador.buscar(habitacionFicticia);
             if (habitacionEncontrada != null) {
-                System.out.println("Habitación encontrada: " + habitacionEncontrada);
+                System.out.println("Habitaciï¿½n encontrada: " + habitacionEncontrada);
             } else {
-                System.out.println("La habitación buscada no se encuentra en la colección.");
+                System.out.println("La habitaciï¿½n buscada no se encuentra en la colecciï¿½n.");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Error al buscar la habitación: " + e.getMessage());
+            System.out.println("Error al buscar la habitaciï¿½n: " + e.getMessage());
         }
     }
 
@@ -180,7 +179,7 @@ public class Vista {
                 System.out.println("No se encontro ninguna habitacion con el identificador proporcionado.");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Error al buscar la habitación: " + e.getMessage());
+            System.out.println("Error al buscar la habitaciï¿½n: " + e.getMessage());
         } catch (OperationNotSupportedException e) {
             throw new RuntimeException(e);
         }
@@ -214,11 +213,11 @@ public class Vista {
             Habitacion habitacionReal = controlador.buscar(habitacionFicticia);
 
             if (huespedReal == null) {
-                throw new NoSuchElementException("El huésped con el DNI proporcionado no se encuentra en el sistema.");
+                throw new NoSuchElementException("El huï¿½sped con el DNI proporcionado no se encuentra en el sistema.");
             }
 
             if (habitacionReal == null) {
-                throw new NoSuchElementException("La habitación con el identificador proporcionado no se encuentra en el sistema.");
+                throw new NoSuchElementException("La habitaciï¿½n con el identificador proporcionado no se encuentra en el sistema.");
             }
 
             Reserva nuevaReserva = new Reserva(huespedReal, habitacionReal, reservaFicticia.getRegimen(), reservaFicticia.getFechaInicioReserva(), reservaFicticia.getFechaFinReserva(), reservaFicticia.getNumeroPersonas());
@@ -239,10 +238,10 @@ public class Vista {
                         System.out.println("Error al insertar la reserva: " + e.getMessage());
                     }
                 } else {
-                    System.out.println("La reserva ya está registrada en el sistema.");
+                    System.out.println("La reserva ya estï¿½ registrada en el sistema.");
                 }
             } else {
-                System.out.println("No hay disponibilidad para el tipo de habitación deseada en el periodo indicado.");
+                System.out.println("No hay disponibilidad para el tipo de habitaciï¿½n deseada en el periodo indicado.");
             }
         } catch (NoSuchElementException e) {
             System.out.println(e.getMessage());
@@ -252,9 +251,9 @@ public class Vista {
         try {
             Reserva[] reservasDelHuesped = controlador.getReservas(huesped);
             if (reservasDelHuesped.length == 0) {
-                System.out.println("No hay reservas para el huésped indicado.");
+                System.out.println("No hay reservas para el huï¿½sped indicado.");
             } else {
-                System.out.println("Lista de reservas del huésped:");
+                System.out.println("Lista de reservas del huï¿½sped:");
                 for (Reserva reserva : reservasDelHuesped) {
                     System.out.println(reserva.toString());
                 }
@@ -268,9 +267,9 @@ public class Vista {
         try {
             Reserva[] reservasTipoHabitacion = controlador.getReservas(tipoHabitacion);
             if (reservasTipoHabitacion.length == 0) {
-                System.out.println("No hay reservas para el tipo de habitación indicado.");
+                System.out.println("No hay reservas para el tipo de habitaciï¿½n indicado.");
             } else {
-                System.out.println("Lista de reservas del tipo de habitación:");
+                System.out.println("Lista de reservas del tipo de habitaciï¿½n:");
                 for (Reserva reserva : reservasTipoHabitacion) {
                     System.out.println(reserva.toString());
                 }
@@ -286,7 +285,7 @@ public class Vista {
 
         for (Reserva reserva : reservasAAnular) {
             if (reserva.getFechaInicioReserva().isAfter(hoy)) {
-                // Si la fecha de inicio de la reserva aún no ha llegado, es anulable.
+                // Si la fecha de inicio de la reserva aï¿½n no ha llegado, es anulable.
                 reservasAnulables.add(reserva);
             }
         }
@@ -301,29 +300,29 @@ public class Vista {
             Reserva[] reservasAnulables = getReservasAnulables(controlador.getReservas(huespedFicticio));
 
             if (reservasAnulables.length == 0) {
-                throw new NoSuchElementException("El huésped no tiene reservas anulables.");
+                throw new NoSuchElementException("El huï¿½sped no tiene reservas anulables.");
             } else if (reservasAnulables.length == 1) {
-                System.out.println("El huésped tiene una reserva anulable: " + reservasAnulables[0]);
-                System.out.println("¿Desea anular esta reserva? (S/N):");
+                System.out.println("El huï¿½sped tiene una reserva anulable: " + reservasAnulables[0]);
+                System.out.println("ï¿½Desea anular esta reserva? (S/N):");
                 String respuesta = Entrada.cadena();
                 if (respuesta.equalsIgnoreCase("S")) {
                     controlador.borrar(reservasAnulables[0]);
                     System.out.println("La reserva ha sido anulada.");
                 } else {
-                    System.out.println("Anulación cancelada.");
+                    System.out.println("Anulaciï¿½n cancelada.");
                 }
             } else {
-                System.out.println("El huésped tiene varias reservas anulables:");
+                System.out.println("El huï¿½sped tiene varias reservas anulables:");
                 for (int i = 0; i < reservasAnulables.length; i++) {
                     System.out.println((i + 1) + ".- " + reservasAnulables[i]);
                 }
-                System.out.println("Introduce el número de la reserva que deseas anular:");
+                System.out.println("Introduce el nï¿½mero de la reserva que deseas anular:");
                 int indice = Entrada.entero() - 1;
                 if (indice >= 0 && indice < reservasAnulables.length) {
                     controlador.borrar(reservasAnulables[indice]);
                     System.out.println("La reserva seleccionada ha sido anulada.");
                 } else {
-                    System.out.println("Número de reserva no válido.");
+                    System.out.println("Nï¿½mero de reserva no vï¿½lido.");
                 }
             }
         } catch (NoSuchElementException e) {
@@ -359,7 +358,7 @@ public class Vista {
                 }
             }
         }
-        System.out.println("Esa habitacion no está disponible.");
+        System.out.println("Esa habitacion no estï¿½ disponible.");
         return null;
     }
 
@@ -372,7 +371,7 @@ public class Vista {
     }
 
     private void realizarCheckin() {
-        System.out.println("Introduce el DNI del huésped que ha realizado la reserva");
+        System.out.println("Introduce el DNI del huï¿½sped que ha realizado la reserva");
         try {
             Huesped huesped = controlador.buscar(Consola.getHuespedPorDni());
             Reserva[] reservasHuesped = controlador.getReservas(huesped);
@@ -380,7 +379,7 @@ public class Vista {
             if (reservasHuesped.length > 0) {
                 int i = 0;
                 if (reservasHuesped.length > 1) {
-                    System.out.println("Elija a qué reserva quiere hacer el checkin introduciendo su número:");
+                    System.out.println("Elija a quï¿½ reserva quiere hacer el checkin introduciendo su nï¿½mero:");
                     for (Reserva reserva : reservasHuesped) {
                         System.out.println(i + ".- " + reserva.toString());
                         i++;
@@ -389,23 +388,23 @@ public class Vista {
                     if (eleccion >= 0 && eleccion < reservasHuesped.length) {
                         controlador.realizarCheckin(reservasHuesped[eleccion], LocalDateTime.now());
                     } else {
-                        System.out.println("Número de reserva no válido. Por favor, inténtalo de nuevo.");
+                        System.out.println("Nï¿½mero de reserva no vï¿½lido. Por favor, intï¿½ntalo de nuevo.");
                         realizarCheckin();
                     }
                 } else {
                     controlador.realizarCheckin(reservasHuesped[0], LocalDateTime.now());
                 }
             } else {
-                System.out.println("No se encontraron reservas para el huésped proporcionado. Por favor, introduce un DNI válido.");
+                System.out.println("No se encontraron reservas para el huï¿½sped proporcionado. Por favor, introduce un DNI vï¿½lido.");
                 realizarCheckin();
             }
         } catch (NoSuchElementException e) {
-            System.out.println("No se encontraron reservas para el huésped proporcionado. Por favor, introduce un DNI válido.");
+            System.out.println("No se encontraron reservas para el huï¿½sped proporcionado. Por favor, introduce un DNI vï¿½lido.");
         }
     }
 
     private void realizarCheckout() {
-        System.out.println("Introduce el DNI del huésped que ha realizado la reserva");
+        System.out.println("Introduce el DNI del huï¿½sped que ha realizado la reserva");
 
         try {
 
@@ -414,7 +413,7 @@ public class Vista {
 
             if (reservasHuesped.length > 0) {
                 if (reservasHuesped.length > 1) {
-                    System.out.println("Elija a qué reserva quiere hacer el checkout introduciendo su número:");
+                    System.out.println("Elija a quï¿½ reserva quiere hacer el checkout introduciendo su nï¿½mero:");
                     for (int i = 0; i < reservasHuesped.length; i++) {
                         System.out.println(i + ".- " + reservasHuesped[i].toString());
                     }
@@ -422,18 +421,18 @@ public class Vista {
                     if (eleccion >= 0 && eleccion < reservasHuesped.length) {
                         controlador.realizarCheckout(reservasHuesped[eleccion], LocalDateTime.now());
                     } else {
-                        System.out.println("Número de reserva no válido. Por favor, inténtalo de nuevo.");
+                        System.out.println("Nï¿½mero de reserva no vï¿½lido. Por favor, intï¿½ntalo de nuevo.");
                         realizarCheckout();
                     }
                 } else {
                     controlador.realizarCheckout(reservasHuesped[0], LocalDateTime.now());
                 }
             } else {
-                System.out.println("No se encontraron reservas para el huésped proporcionado. Por favor, introduce un DNI válido.");
+                System.out.println("No se encontraron reservas para el huï¿½sped proporcionado. Por favor, introduce un DNI vï¿½lido.");
                 realizarCheckout();
             }
         } catch (NoSuchElementException e) {
-            System.out.println("No se encontraron reservas para el huésped proporcionado. Por favor, introduce un DNI válido.");
+            System.out.println("No se encontraron reservas para el huï¿½sped proporcionado. Por favor, introduce un DNI vï¿½lido.");
         }
     }
 

@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Modelo {
-    public static final int CAPACIDAD = 45;
     private Huespedes huespedes;
     private Habitaciones habitaciones;
     private Reservas reservas;
@@ -40,9 +39,9 @@ public class Modelo {
         reservas.insertar(reserva2);
     }
     public void comenzar() throws OperationNotSupportedException {
-        huespedes = new Huespedes(CAPACIDAD);
-        habitaciones = new Habitaciones(CAPACIDAD);
-        reservas = new Reservas(CAPACIDAD);
+        huespedes = new Huespedes();
+        habitaciones = new Habitaciones();
+        reservas = new Reservas();
         pruebas();
     }
 
@@ -55,7 +54,7 @@ public class Modelo {
         if (huespedes.buscar(huesped) == null) {
             huespedes.insertar(huesped);
         } else {
-            throw new OperationNotSupportedException("El huésped ya está registrado en el sistema.");
+            throw new OperationNotSupportedException("El huï¿½sped ya estï¿½ registrado en el sistema.");
         }
     }
 
@@ -69,86 +68,68 @@ public class Modelo {
 
     public void borrar(Huesped huesped) throws OperationNotSupportedException {
         if (huespedes.buscar(huesped) == null) {
-            throw new OperationNotSupportedException("El huésped a borrar no existe.");
+            throw new OperationNotSupportedException("El huï¿½sped a borrar no existe.");
         }
         huespedes.borrar(huesped);
     }
 
-    public Huesped[] getHuespedes() {
-        try {
-            Huesped[] original = huespedes.get();
-            Huesped[] copia = new Huesped[original.length];
-            for (int i = 0; i < original.length; i++) {
-                copia[i] = new Huesped(original[i]);
-            }
-            return copia;
-        } catch (Exception e) {
-            System.out.println("Error al obtener los huéspedes: " + e.getMessage());
-            return null;
+    public ArrayList<Huesped> getHuespedes() {
+        ArrayList<Huesped> copia = new ArrayList<>();
+        for (Huesped huesped : huespedes.get()) {
+            copia.add(new Huesped(huesped));
         }
+        return copia;
     }
+
 
     // Metodos para la gestion de Habitacion:
     public void insertar(Habitacion habitacion) throws OperationNotSupportedException {
         if (habitaciones.buscar(habitacion) == null) {
             habitaciones.insertar(habitacion);
         } else {
-            throw new OperationNotSupportedException("La habitacion ya está registrada en el sistema.");
+            throw new OperationNotSupportedException("La habitacion ya estï¿½ registrada en el sistema.");
         }
     }
 
     public Habitacion buscar(Habitacion habitacion) throws NoSuchElementException {
         Habitacion habitacionEncontrada = habitaciones.buscar(habitacion);
         if (habitacionEncontrada == null) {
-            throw new NoSuchElementException("La habitación buscada no existe.");
+            throw new NoSuchElementException("La habitaciï¿½n buscada no existe.");
         }
         return habitacionEncontrada;
     }
 
     public void borrar(Habitacion habitacion) throws OperationNotSupportedException {
         if (habitaciones.buscar(habitacion) == null) {
-            throw new OperationNotSupportedException("La habitación a borrar no existe.");
+            throw new OperationNotSupportedException("La habitaciï¿½n a borrar no existe.");
         }
         habitaciones.borrar(habitacion);
     }
 
-    public Habitacion[] getHabitaciones() {
-        try {
-            Habitacion[] original = habitaciones.get();
-            Habitacion[] copia = new Habitacion[original.length];
-            for (int i = 0; i < original.length; i++) {
-                copia[i] = new Habitacion(original[i]);
-            }
-            return copia;
-        } catch (Exception e) {
-            System.out.println("Error al obtener las habitaciones: " + e.getMessage());
-            return null;
+    public ArrayList<Habitacion> getHabitaciones() {
+        ArrayList<Habitacion> copia = new ArrayList<>();
+        for (Habitacion habitacion : habitaciones.get()) {
+            copia.add(new Habitacion(habitacion));
         }
+        return copia;
     }
 
-    public Habitacion[] getHabitaciones(TipoHabitacion tipoHabitacion) {
-        try {
-            Habitacion[] original = habitaciones.get();
-            Habitacion[] copia = new Habitacion[original.length];
-            int indice = 0;
-            for (Habitacion habitacion : original) {
-                if (habitacion.getTipoHabitacion() == tipoHabitacion) {
-                    copia[indice++] = new Habitacion(habitacion);  // Usar el constructor de copia
+    public ArrayList<Habitacion> getHabitaciones(TipoHabitacion tipoHabitacion) {
+        ArrayList<Habitacion> copia = new ArrayList<>();
+            for (Habitacion habitacion : habitaciones.get()) {
+                if (habitacion.getTipoHabitacion().equals(tipoHabitacion)) {
+                    copia.add(new Habitacion(habitacion));  // Usar el constructor de copia
                 }
             }
-            return copia;  // Devolver array del tamaño correcto
-        } catch (Exception e) {
-            System.out.println("Error al obtener las habitaciones: " + e.getMessage());
-            return null;
+            return copia;  // Devolver array del tamaï¿½o correcto
         }
-    }
 
     // Metodos para la gestion de Reserva:
     public void insertar(Reserva reserva) throws OperationNotSupportedException {
         if (reservas.buscar(reserva) == null) {
             reservas.insertar(reserva);
         } else {
-            throw new OperationNotSupportedException("La reserva ya está registrada en el sistema.");
+            throw new OperationNotSupportedException("La reserva ya estï¿½ registrada en el sistema.");
         }
     }
     public Reserva buscar(Reserva reserva) throws NoSuchElementException {
@@ -164,83 +145,24 @@ public class Modelo {
         }
         reservas.borrar(reserva);
     }
-    public Reserva[] getReservas() {
-        try {
-            Reserva[] original = reservas.get();
-            Reserva[] copia = new Reserva[original.length];
-            for (int i = 0; i < original.length; i++) {
-                copia[i] = new Reserva(original[i]);
+    public ArrayList<Reserva> getReservas() {
+            ArrayList<Reserva> copia = new ArrayList<>();
+            for (Reserva reserva : reservas.get()) {
+                copia.add(new Reserva(reserva));
             }
             return copia;
-        } catch (Exception e) {
-            System.out.println("Error al obtener las reservas: " + e.getMessage());
-            return null;
-        }
     }
-    public Reserva[] getReservas(Huesped huesped){
+    public ArrayList<Reserva> getReservas(Huesped huesped){
         return reservas.getReservas(huesped);
     }
-    /*
-    public Reserva[] getReservas(Huesped huesped) {
-        try {
-            Reserva[] original = reservas.get();
-            Reserva[] copia = new Reserva[original.length];
-            int indice = 0;
-            for (Reserva reserva : original) {
-                if (reserva.getHuesped().equals(huesped)) {
-                    copia[indice++] = new Reserva(reserva);
-                }
-            }
-            return copia;
-        } catch (Exception e) {
-            System.out.println("Error al obtener las reservas: " + e.getMessage());
-            return null;
-        }
-    }
-     */
-    public Reserva[] getReservas(TipoHabitacion tipoHabitacion){
+
+    public ArrayList<Reserva> getReservas(TipoHabitacion tipoHabitacion){
         return reservas.getReservas(tipoHabitacion);
     }
-    /*
-    public Reserva[] getReservas(TipoHabitacion tipoHabitacion) {
-        try {
-            Reserva[] original = reservas.get();
-            Reserva[] copia = new Reserva[original.length];
-            int indice = 0;
-            for (Reserva reserva : original) {
-                if (reserva.getHabitacion().getTipoHabitacion() == tipoHabitacion) {
-                    copia[indice++] = new Reserva(reserva);
-                }
-            }
-            return copia;
-        } catch (Exception e) {
-            System.out.println("Error al obtener las reservas: " + e.getMessage());
-            return null;
-        }
-    }
-     */
-    public Reserva[] getReservasFuturas(Habitacion habitacion){
+
+    public ArrayList<Reserva> getReservasFuturas(Habitacion habitacion){
        return reservas.getReservasFuturas(habitacion);
     }
-   /* public Reserva[] getReservasFuturas(Habitacion habitacion) {
-        try {
-            Reserva[] original = reservas.get();
-            Reserva[] copia = new Reserva[original.length];
-            int indice = 0;
-            for (Reserva reserva : original) {
-                if (reserva.getHabitacion() == habitacion) {
-                    if(reserva.getFechaInicioReserva().isAfter(LocalDate.now())){
-                    copia[indice++] = new Reserva(reserva);
-                    }
-                }
-            }
-            return copia;
-        } catch (Exception e) {
-            System.out.println("Error al obtener las reservas: " + e.getMessage());
-            return null;
-        }
-    }
-    */
 
    public void realizarCheckin (Reserva reserva, LocalDateTime fecha){
         reservas.realizarCheckin(reserva, fecha);

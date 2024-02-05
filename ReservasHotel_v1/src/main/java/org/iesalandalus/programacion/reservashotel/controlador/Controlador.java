@@ -9,6 +9,7 @@ import org.iesalandalus.programacion.reservashotel.vista.Vista;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Controlador {
 
@@ -44,7 +45,7 @@ public class Controlador {
     public void borrar(Huesped huesped) throws OperationNotSupportedException {
         modelo.borrar(huesped);
     }
-    public Huesped[] getHuespedes(){
+    public ArrayList<Huesped> getHuespedes(){
         return modelo.getHuespedes();
     }
 
@@ -57,10 +58,10 @@ public class Controlador {
     public void borrar(Habitacion habitacion) throws OperationNotSupportedException {
         modelo.borrar(habitacion);
     }
-    public Habitacion[] getHabitaciones(){
+    public ArrayList<Habitacion> getHabitaciones(){
         return modelo.getHabitaciones();
     }
-    public Habitacion[] getHabitaciones(TipoHabitacion tipoHabitacion){
+    public ArrayList<Habitacion> getHabitaciones(TipoHabitacion tipoHabitacion){
         return modelo.getHabitaciones(tipoHabitacion);
     }
 
@@ -73,16 +74,16 @@ public class Controlador {
     public void borrar(Reserva reserva) throws OperationNotSupportedException {
         modelo.borrar(reserva);
     }
-    public Reserva[] getReservas(){
+    public ArrayList<Reserva> getReservas(){
         return modelo.getReservas();
     }
-    public Reserva[] getReservas(Huesped huesped){
+    public ArrayList<Reserva> getReservas(Huesped huesped){
         return modelo.getReservas(huesped);
     }
-    public Reserva[] getReservas(TipoHabitacion tipoHabitacion){
+    public ArrayList<Reserva> getReservas(TipoHabitacion tipoHabitacion){
         return modelo.getReservas(tipoHabitacion);
     }
-    public Reserva[] getReservasFuturas(Habitacion habitacion){
+    public ArrayList<Reserva> getReservasFuturas(Habitacion habitacion){
         return modelo.getReservasFuturas(habitacion);
     }
 
