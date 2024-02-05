@@ -386,7 +386,7 @@ public class Vista {
             ArrayList<Reserva> reservasHuesped = controlador.getReservas(huesped);
 
             if (reservasHuesped.size() > 0) {
-                listarReservas(huesped); // Utilizamos listarReservas aquí
+                listarReservas(huesped);
                 System.out.println();
                 System.out.println("Elija a qué reserva quiere hacer el checkin introduciendo su número:");
                 int eleccion = Entrada.entero();
@@ -412,7 +412,7 @@ public class Vista {
             ArrayList<Reserva> reservasHuesped = controlador.getReservas(huesped);
 
             if (reservasHuesped.size() > 0) {
-                listarReservas(huesped); // Utilizamos listarReservas aquí
+                listarReservas(huesped);
                 System.out.println("Elija a qué reserva quiere hacer el checkout introduciendo su número:");
                 int eleccion = Entrada.entero();
                 if (eleccion >= 0 && eleccion < reservasHuesped.size()) {
