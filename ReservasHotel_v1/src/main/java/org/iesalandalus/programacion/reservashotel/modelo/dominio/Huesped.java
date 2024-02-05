@@ -19,28 +19,28 @@ public class Huesped {
 
     public void setNombre(String nombre) {
         if (nombre == null || !nombre.matches("^([A-Z][a-z]*)(\\s[A-Z][a-z]*)*$")) {
-            throw new IllegalArgumentException("Nombre no válido");
+            throw new IllegalArgumentException("Nombre no vï¿½lido");
         }
         this.nombre = nombre;
     }
 
     public void setTelefono(String telefono) {
         if (telefono == null || !telefono.matches(ER_TELEFONO)) {
-            throw new IllegalArgumentException("Teléfono no válido");
+            throw new IllegalArgumentException("Telï¿½fono no vï¿½lido");
         }
         this.telefono = telefono;
     }
 
     public void setCorreo(String correo) {
         if (correo == null || !correo.matches(ER_CORREO)) {
-            throw new IllegalArgumentException("Correo no válido");
+            throw new IllegalArgumentException("Correo no vï¿½lido");
         }
         this.correo = correo;
     }
 
     public void setDni(String dni) {
         if (dni == null || !comprobarLetraDni(dni)) {
-            throw new IllegalArgumentException("DNI no válido");
+            throw new IllegalArgumentException("DNI no vï¿½lido");
         }
         this.dni = dni;
     }
@@ -111,13 +111,13 @@ public class Huesped {
                 String numero = matcher.group(1);
                 String letra = matcher.group(2);
                 int indice = Integer.parseInt(numero) % 23;
-                char letraCorrecta = "TRWAGMYFPDXBNJZSQVHLCKE".charAt(indice); // Letras válidas
+                char letraCorrecta = "TRWAGMYFPDXBNJZSQVHLCKE".charAt(indice); // Letras vï¿½lidas
                 return letra.charAt(0) == letraCorrecta;
             } else {
                 return false;
             }
         } catch (NumberFormatException e) {
-            System.err.println("Error: El número del DNI no es válido.");
+            System.err.println("Error: El nï¿½mero del DNI no es vï¿½lido.");
             e.printStackTrace();
             return false;
         } catch (IllegalStateException e) {
@@ -126,7 +126,6 @@ public class Huesped {
             return false;
         }
     }
-
     public String getIniciales() {
         String[] palabras = nombre.split("\\s+");
         StringBuilder iniciales = new StringBuilder();
