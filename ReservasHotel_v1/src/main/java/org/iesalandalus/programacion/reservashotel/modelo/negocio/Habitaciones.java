@@ -2,37 +2,27 @@ package org.iesalandalus.programacion.reservashotel.modelo.negocio;
 
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
 import javax.naming.OperationNotSupportedException;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class Habitaciones {
+    private ArrayList<Habitacion> coleccionHabitaciones;
 
-    private int capacidad;
-    private int tamano;
-    private Habitacion[] coleccionHabitaciones;
-
-    public Habitaciones(int capacidad) {
-        this.capacidad = capacidad;
-        this.coleccionHabitaciones = new Habitacion[capacidad];
+    public Habitaciones() {
+        this.coleccionHabitaciones = new ArrayList<>();
     }
 
-    public Habitacion[] get() {
-        return copiaProfundaHabitaciones();
-    }
-
-    private Habitacion[] copiaProfundaHabitaciones() {
-        Habitacion[] copiaProfunda = new Habitacion[tamano];
-        for (int i = 0; i < tamano; i++) {
-            copiaProfunda[i] = new Habitacion(coleccionHabitaciones[i]);
+    // He unido la copia profunda y el get en uno
+    public ArrayList<Habitacion> get() {
+        ArrayList<Habitacion> copia = new ArrayList<>();
+        for (Habitacion habitacion : coleccionHabitaciones) {
+            copia.add(new Habitacion(habitacion));
         }
-        return copiaProfunda;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
+        return copia;
     }
 
     public int getTamano() {
-        return tamano;
+        return coleccionHabitaciones.size();
     }
 
     public void insertar(Habitacion habitacion) throws OperationNotSupportedException {
@@ -42,56 +32,21 @@ public class Habitaciones {
         if (buscar(habitacion) != null) {
             throw new OperationNotSupportedException("La habitación ya existe y no se admiten repetidos.");
         }
-        if (tamanoSuperado()) {
-            throw new OperationNotSupportedException("No se pueden insertar más habitaciones, se ha alcanzado la capacidad máxima.");
-        }
-        if (capacidadSuperada()) {
-            throw new IllegalStateException("Se ha superado la capacidad máxima, esto no debería ocurrir.");
-        }
-        coleccionHabitaciones[tamano++] = habitacion;
+        coleccionHabitaciones.add(habitacion);
     }
 
     public Habitacion buscar(Habitacion habitacion) {
-        for (int i = 0; i < tamano; i++) {
-            if (coleccionHabitaciones[i].equals(habitacion)) {
-                return coleccionHabitaciones[i];
-            }
+        int indice = coleccionHabitaciones.indexOf(habitacion);
+        if (indice != -1) {
+            return coleccionHabitaciones.get(indice);
         }
         return null;
     }
 
-
     public void borrar(Habitacion habitacion) throws NoSuchElementException {
-        int indice = buscarIndice(habitacion);
-        if (indice != -1) {
-            desplazarUnaPosicionHaciaIzquierda(indice);
-            tamano--;
-        } else {
+        if (!coleccionHabitaciones.remove(habitacion)) {
             throw new NoSuchElementException("La habitación proporcionada no se encuentra en la colección.");
         }
     }
 
-    private int buscarIndice(Habitacion habitacion) {
-        for (int i = 0; i < tamano; i++) {
-            if (coleccionHabitaciones[i].equals(habitacion)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-
-    private boolean tamanoSuperado() {
-        return tamano >= capacidad;
-    }
-
-    private boolean capacidadSuperada() {
-        return tamano > capacidad;
-    }
-
-    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
-        for (int i = indice; i < tamano - 1; i++) {
-            coleccionHabitaciones[i] = coleccionHabitaciones[i + 1];
-        }
-    }
 }
