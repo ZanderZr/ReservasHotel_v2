@@ -1,7 +1,6 @@
 package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 
 import java.util.Objects;
-
 public class Habitacion {
     public static final double MIN_PRECIO_HABITACION = 40.0;
     public static final double MAX_PRECIO_HABITACION = 150.0;
@@ -58,7 +57,7 @@ public class Habitacion {
     private void setPlanta(int planta) {
 
         if (planta < MIN_NUMERO_PLANTA || planta > MAX_NUMERO_PLANTA) {
-            throw new IllegalArgumentException("Número de planta no válido.");
+            throw new IllegalArgumentException("Nï¿½mero de planta no vï¿½lido.");
         } else {
             this.planta = planta;
         }
@@ -70,7 +69,7 @@ public class Habitacion {
 
     private void setPuerta(int puerta) {
         if (puerta < MIN_NUMERO_PUERTA || puerta > MAX_NUMERO_PUERTA) {
-            throw new IllegalArgumentException("Número de puerta no válido.");
+            throw new IllegalArgumentException("Nï¿½mero de puerta no vï¿½lido.");
         } else {
             this.puerta = puerta;
         }
@@ -82,7 +81,7 @@ public class Habitacion {
 
     public void setPrecio(double precio) {
         if (precio < MIN_PRECIO_HABITACION || precio > MAX_PRECIO_HABITACION) {
-            throw new IllegalArgumentException("Precio no válido.");
+            throw new IllegalArgumentException("Precio no vï¿½lido.");
         } else {
             this.precio = precio;
         }
@@ -94,7 +93,7 @@ public class Habitacion {
 
     public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
         if (tipoHabitacion == null) {
-            throw new NullPointerException("Tipo de habitación no puede ser nulo.");
+            throw new NullPointerException("Tipo de habitaciï¿½n no puede ser nulo.");
         }else {
             this.tipoHabitacion = tipoHabitacion;
         }

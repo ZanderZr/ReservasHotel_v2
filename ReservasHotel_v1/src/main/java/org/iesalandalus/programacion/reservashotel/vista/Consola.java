@@ -14,7 +14,7 @@ public class Consola {
     }
 
     public static void mostrarMenu() {
-        System.out.println("Menú:");
+        System.out.println("Menï¿½:");
         for (Opcion opcion : Opcion.values()) {
             System.out.println(opcion.toString());
         }
@@ -24,7 +24,7 @@ public class Consola {
         Opcion opcion = null;
         int numOpcion;
         do {
-            System.out.println("Elige una opción insertando el número de dicha opción:");
+            System.out.println("Elige una opciï¿½n insertando el nï¿½mero de dicha opciï¿½n:");
             numOpcion = Entrada.entero();
         } while (numOpcion > 15 || numOpcion < 1);
 
@@ -85,44 +85,43 @@ public class Consola {
         System.out.println("Nombre:");
         String nombre = Entrada.cadena();
         if (nombre == null) {
-            throw new IllegalArgumentException("Nombre no válido.");
+            throw new IllegalArgumentException("Nombre no vï¿½lido.");
         }
 
         System.out.println("Telefono:");
         String telefono = Entrada.cadena();
         if (telefono == null) {
-            throw new IllegalArgumentException("Teléfono no válido.");
+            throw new IllegalArgumentException("Telï¿½fono no vï¿½lido.");
         }
 
         System.out.println("Correo:");
         String correo = Entrada.cadena();
         if (correo == null) {
-            throw new IllegalArgumentException("Correo no válido.");
+            throw new IllegalArgumentException("Correo no vï¿½lido.");
         }
 
         System.out.println("DNI:");
         String dni = Entrada.cadena();
         if (dni == null) {
-            throw new IllegalArgumentException("DNI no válido.");
+            throw new IllegalArgumentException("DNI no vï¿½lido.");
         }
 
         LocalDate fechaNacimiento = leerFecha("Introduce la fecha de nacimiento en formato 'dd/MM/yyyy':");
         if (fechaNacimiento == null || fechaNacimiento.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("Fecha de nacimiento no válida.");
+            throw new IllegalArgumentException("Fecha de nacimiento no vï¿½lida.");
         }
 
         return new Huesped(nombre, telefono, correo, dni, fechaNacimiento);
     }
 
-
     public static Huesped getHuespedPorDni() {
-        System.out.print("Introduce el DNI del huésped: ");
+        System.out.print("Introduce el DNI del huï¿½sped: ");
         String dni = Entrada.cadena();
 
         try {
             return new Huesped("Nombre Ficticio", "666777888", "correoficticio@gmail.com", dni, LocalDate.now().minusYears(20));
         } catch (IllegalArgumentException e) {
-            System.out.println("DNI introducido no es válido. Por favor, inténtalo de nuevo.");
+            System.out.println("DNI introducido no es vï¿½lido. Por favor, intï¿½ntalo de nuevo.");
             return getHuespedPorDni();
         }
     }
@@ -138,7 +137,7 @@ public class Consola {
                 fecha = LocalDate.parse(fechaString, formatter);
                 fechaValida = true;
             } catch (DateTimeParseException e) {
-                System.out.println("Fecha no válida. Por favor, introduce la fecha en el formato dd/MM/yyyy.");
+                System.out.println("Fecha no vï¿½lida. Por favor, introduce la fecha en el formato dd/MM/yyyy.");
             }
         }
         return fecha;
@@ -155,31 +154,31 @@ public class Consola {
                 fechaHora = LocalDateTime.parse(fechaHoraString, formatter);
                 fechaHoraValida = true;
             } catch (DateTimeParseException e) {
-                System.out.println("Fecha no válida. Por favor, introduce la fecha en el formato dd/MM/yyyy HH:hh.");
+                System.out.println("Fecha no vï¿½lida. Por favor, introduce la fecha en el formato dd/MM/yyyy HH:hh.");
             }
         }
         return fechaHora;
     }
 
     public static Habitacion leerHabitacion() throws IllegalArgumentException {
-        System.out.println("Introduce los datos de una nueva habitación:");
+        System.out.println("Introduce los datos de una nueva habitaciï¿½n:");
 
-        System.out.println("Número de planta (1 - 3):");
+        System.out.println("Nï¿½mero de planta (1 - 3):");
         int planta = Entrada.entero();
         if (planta < 1 || planta > 3) {
-            throw new IllegalArgumentException("Número de planta no válido.");
+            throw new IllegalArgumentException("Nï¿½mero de planta no vï¿½lido.");
         }
 
-        System.out.println("Número de puerta (1 - 15):");
+        System.out.println("Nï¿½mero de puerta (1 - 15):");
         int puerta = Entrada.entero();
         if (puerta < 1 || puerta > 15) {
-            throw new IllegalArgumentException("Número de puerta no válido.");
+            throw new IllegalArgumentException("Nï¿½mero de puerta no vï¿½lido.");
         }
 
         System.out.println("Precio (40.0 - 150.0):");
         double precio = Entrada.realDoble();
         if (precio < 40.0 || precio > 150.0) {
-            throw new IllegalArgumentException("Precio no válido.");
+            throw new IllegalArgumentException("Precio no vï¿½lido.");
         }
 
         TipoHabitacion tipoHabitacion = leerTipoHabitacion();
@@ -192,12 +191,12 @@ public class Consola {
         int planta;
         int puerta;
         do {
-            System.out.println("Introduce el número de planta de la habitación (1-3):");
+            System.out.println("Introduce el nï¿½mero de planta de la habitaciï¿½n (1-3):");
             planta = Entrada.entero();
         } while (planta < 1 || planta > 3);
 
         do {
-            System.out.println("Introduce el número de puerta de la habitación (1-15):");
+            System.out.println("Introduce el nï¿½mero de puerta de la habitaciï¿½n (1-15):");
             puerta = Entrada.entero();
         } while (puerta < 1 || puerta > 15);
 
@@ -209,7 +208,7 @@ public class Consola {
         TipoHabitacion tipoHabitacion = null;
         int opcionTipoHab;
         do {
-            System.out.println("Tipo de habitación:\n1.- Suite\n2.- Simple\n3.- Doble\n4.- Triple");
+            System.out.println("Tipo de habitaciï¿½n:\n1.- Suite\n2.- Simple\n3.- Doble\n4.- Triple");
 
             opcionTipoHab = Entrada.entero();
 
@@ -237,7 +236,7 @@ public class Consola {
         Regimen regimen = null;
         int opcionReg;
         do {
-            System.out.println("Tipo de regimen:\n1.- Solo alojamiento\n2.- Alojamiento y desayuno\n3.- Media pensión\n4.- Pension completa");
+            System.out.println("Tipo de regimen:\n1.- Solo alojamiento\n2.- Alojamiento y desayuno\n3.- Media pensiï¿½n\n4.- Pension completa");
             opcionReg = Entrada.entero();
         } while (opcionReg < 1 || opcionReg > 4);
 

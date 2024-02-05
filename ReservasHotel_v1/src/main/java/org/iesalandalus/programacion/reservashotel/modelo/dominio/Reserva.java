@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
-
 public class Reserva {
 
     public static final int MAX_NUMERO_MESES_RESERVA = 3;
@@ -99,7 +98,7 @@ public class Reserva {
         LocalDate maxFechaInicioReserva = hoy.plusMonths(MAX_NUMERO_MESES_RESERVA);
 
         if (fechaInicioReserva.isBefore(hoy)) {
-            throw new IllegalArgumentException("La fecha de inicio de la reserva no puede ser anterior al día actual.");
+            throw new IllegalArgumentException("La fecha de inicio de la reserva no puede ser anterior al dï¿½a actual.");
         } else if (fechaInicioReserva.isAfter(maxFechaInicioReserva)) {
             throw new IllegalArgumentException("La fecha de inicio de la reserva no puede ser posterior a " + MAX_NUMERO_MESES_RESERVA + " meses a partir de ahora.");
         } else {
@@ -126,14 +125,14 @@ public class Reserva {
             throw new IllegalArgumentException("El check-out no puede ser anterior al check-in.");
         }
         if (checkOut.isAfter(fechaFinReserva.atTime(MAX_HORAS_POSTERIOR_CHECKOUT, 0))) {
-            throw new IllegalArgumentException("El check-out debe hacerse como máximo a las " + MAX_HORAS_POSTERIOR_CHECKOUT + ":00 horas del día en que finaliza la reserva.");
+            throw new IllegalArgumentException("El check-out debe hacerse como mï¿½ximo a las " + MAX_HORAS_POSTERIOR_CHECKOUT + ":00 horas del dï¿½a en que finaliza la reserva.");
         }
         this.checkOut = checkOut;
     }
 
     private void setPrecio() {
         if (habitacion == null || regimen == null || fechaInicioReserva == null || fechaFinReserva == null) {
-            throw new IllegalArgumentException("Los datos de la reserva no están completos.");
+            throw new IllegalArgumentException("Los datos de la reserva no estï¿½n completos.");
         }
 
         double precioHabitacion = habitacion.getPrecio();
@@ -145,7 +144,7 @@ public class Reserva {
         }
 
         if (numeroPersonas <= 0) {
-            throw new IllegalArgumentException("El número de personas debe ser mayor que cero.");
+            throw new IllegalArgumentException("El nï¿½mero de personas debe ser mayor que cero.");
         }
         if(incrementoPrecio!= 0) {
             this.precio = ((incrementoPrecio * numeroPersonas) + precioHabitacion) * numeroNoches;
@@ -157,7 +156,7 @@ public class Reserva {
 
     public void setNumeroPersonas(int numeroPersonas) {
         if (numeroPersonas > habitacion.getTipoHabitacion().getNumeroMaximoPersonas()) {
-            throw new IllegalArgumentException("El número de personas supera el número máximo permitido para este tipo de habitación.");
+            throw new IllegalArgumentException("El nï¿½mero de personas supera el nï¿½mero mï¿½ximo permitido para este tipo de habitaciï¿½n.");
         }
         this.numeroPersonas = numeroPersonas;
     }

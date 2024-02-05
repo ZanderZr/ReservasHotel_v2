@@ -1,10 +1,9 @@
 package org.iesalandalus.programacion.reservashotel.modelo.dominio;
-
 public enum TipoHabitacion {
     SUITE("Suite", 4),
-    SIMPLE("Habitación simple", 1),
-    DOBLE("Habitación doble", 2),
-    TRIPLE("Habitación triple", 3);
+    SIMPLE("Habitaciï¿½n simple", 1),
+    DOBLE("Habitaciï¿½n doble", 2),
+    TRIPLE("Habitaciï¿½n triple", 3);
 
     private final String descripcion;
     private final int numeroMaximoPersonas;
@@ -13,7 +12,7 @@ public enum TipoHabitacion {
     TipoHabitacion(String descripcion, int numeroMaximoPersonas) {
         this.descripcion = descripcion;
         this.numeroMaximoPersonas = numeroMaximoPersonas;
-        this.cadenaAMostrar = descripcion + " - Máximo " + numeroMaximoPersonas + " personas";
+        this.cadenaAMostrar = descripcion + " - Mï¿½ximo " + numeroMaximoPersonas + " personas";
     }
 
     public int getNumeroMaximoPersonas() {

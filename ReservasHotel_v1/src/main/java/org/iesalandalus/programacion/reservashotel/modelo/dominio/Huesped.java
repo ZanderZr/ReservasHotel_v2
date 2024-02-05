@@ -138,7 +138,6 @@ public class Huesped {
 
         return iniciales.toString().toUpperCase();
     }
-
     @Override
     public String toString() {
         return "Huesped{" + "nombre='" + nombre + '\'' + ", telefono='" + telefono + '\'' + ", correo='" + correo + '\'' + ", dni='" + dni + '\'' + ", fechaNacimiento=" + fechaNacimiento + '}';

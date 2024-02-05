@@ -25,7 +25,7 @@ public class Reservas {
         for(Reserva reserva : coleccionReservas) {
             copia.add(new Reserva(reserva));
         }
-        return null;
+        return copia;
     }
     public int getTamano(){
         return coleccionReservas.size();
